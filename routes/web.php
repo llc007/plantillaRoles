@@ -23,6 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@admin')->name('admin');
 
 
 Route::get('/test', function () {
@@ -37,3 +38,34 @@ Route::get('/test', function () {
 Route::resource('/role', 'RoleController')->names('role');
 Route::resource('/user', 'UserController',['except'=>[
     'create','store']])->names('user');
+
+
+
+
+
+
+
+//Ruta de prueba de componentes
+Route::get('/testReportes', 'HomeController@testReportes')->name('testReportes');
+
+Route::get('/testExcel', function () {
+    return view('pruebaComponentes\importarExcel');
+});
+
+/*
+
+RUTAS DE ENTREGAS
+*/
+
+//Subir entregas POST
+Route::post('/import-list-excel', 'EntregaController@subirEntregas')->name('subirEntregas');
+Route::resource('/entrega', 'EntregaController')->names('entrega');
+Route::get('/entregas-hoy', 'EntregaController@entregasHoy')->name('entregasHoy');
+
+//Mostrar entregas pendientes por patente
+Route::get('/entregas-patente', 'EntregaController@entregasPatente')->name('entregasPatente');
+Route::get('/entrega-proceso/{entrega}', 'EntregaController@entregaProceso')->name('entregaProceso');
+Route::post('/entrega-exitosa', 'EntregaController@entregaExitosa')->name('entregaExitosa');
+
+
+Route::resource('/producto-entregado', 'productoEntregadoController')->names('productoEntregado');

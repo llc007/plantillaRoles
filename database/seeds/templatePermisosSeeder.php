@@ -43,6 +43,14 @@ class templatePermisosSeeder extends Seeder
             'full-access' => 'yes'
         ]);
 
+        //Usuario registrado
+        $rolUser = Role::create([
+            'name' => 'Registered User',
+            'slug' => 'registereduser',
+            'description' => 'Registered User',
+            'full-access' => 'no'
+        ]);
+
         //table role_user
         $userAdmin->roles()->sync([$rolAdmin->id]);
 
@@ -136,6 +144,22 @@ class templatePermisosSeeder extends Seeder
                 'description' => 'El usuario puede eliminar users',
             ]);
             $permission_all[]=$permission->id;
+
+        //new
+        $permission = Permission::create([
+            'name' => 'Show own user',
+            'slug' => 'userown.show',
+            'description' => 'El usuario puede ver su user',
+        ]);
+        $permission_all[]=$permission->id;
+
+        //new
+        $permission = Permission::create([
+            'name' => 'Edit own user',
+            'slug' => 'userown.edit',
+            'description' => 'El usuario puede editar su usuario',
+        ]);
+        $permission_all[]=$permission->id;
 
         //Permission Roles comentado porque ya tiene full access
 //        $rolAdmin->permissions()->sync($permission_all);

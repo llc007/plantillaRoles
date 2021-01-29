@@ -149,7 +149,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        Gate::authorize('haveaccess','role.destroy');
+        $this->authorize('haveaccess','role.destroy');
         $role->delete();
 
         return redirect()->route('role.index')->with('status_success','Rol eliminado correctamente');
